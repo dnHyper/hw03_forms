@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Профайл пользователя
+  {% if username.get_full_name %}
+    {{ username.get_full_name  }}
+  {% else %}
+    {{ username.username }}
+  {% endif %}
+{% endblock %}
+{% block content %}
+  {% include 'includes/ajax_script.html' %}
+  <section class="cta-section theme-bg-light py-5">
+    <div class="container text-center single-col-max-width">
+      <h2 class="heading" style="padding-top:1rem !important">
+        Все посты пользователя
+        {% if username.get_full_name %}
+          {{ username.get_full_name  }}
+        {% else %}
+          {{ username.username }}
+        {% endif %}
+      </h2>
+      <div class="intro">Всего постов:
+        {{ username.posts.count }}
+      </div>
+
+    </div>
+  </section>
+  <article class="blog-post px-3 py-5 p-md-5">
+      {% for post in page_obj %}
+        {% include 'posts/includes/posts.html' %}
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+      {% endfor %} 
+  </article>
+
+  <article class="blog-post px-3 py-5 p-md-5">
+    {% include 'includes/paginator.html' %}
+  </article>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    {% include 'includes/header.html'%}
+    <title>{% block title %}Yatube{% endblock %}</title>
+  </head>
+  <body>
+    <header class="header text-center">
+      {% include 'includes/navigation.html'%}
+    </header>
+    <main>
+      <div class="main-wrapper">
+
+        {% block content %}
+          Контент не подвезли :(
+        {% endblock %}
+      </div>
+    </main>
+    <div class="footer-helper"></div>
+    <footer class="footer text-center py-2 theme-bg-dark">
+      {% include 'includes/footer.html' %}
+    </footer>
+    <script src="{% static 'js/popper.min.js' %}"></script> 
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> 
+  </body>
+</html>

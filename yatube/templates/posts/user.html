@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Информация о авторе {{ user.username }}{% endblock %} 
+{% block content %}
+  <h1>Информация о авторе 
+    {% if user.get_full_name %}
+      <a href="{% url 'posts:user_show' user.id %}">{{ user.get_full_name }}</a>
+    {% else %}
+      <a href="{% url 'posts:user_show' user.id %}">{{ user.username }}</a>
+    {% endif %}
+  </h1>
+  <ul>
+    <li>Дата регистрации: {{ user.date_joined|date:"d E Y" }}</li>
+    {% if count > 0 %}
+      <li>Оставил записей: {{ count }}</li>
+    {% else %}
+      <li>Пока не оставил ни одной записи</li>
+    {% endif %}
+  </ul>
+{% endblock %} 

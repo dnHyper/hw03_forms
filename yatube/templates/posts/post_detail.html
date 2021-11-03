@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Пост {{ post.text|truncatechars:30 }}{% endblock %}
+{% block content %}
+  {% include 'includes/ajax_script.html' %}
+  <section class="cta-section theme-bg-light py-5">
+    <div class="container text-center single-col-max-width">
+      <h2 class="heading">{{ post.text|truncatechars:30 }}</h2>
+      <div class="intro">
+        Автор поста: {% include 'posts/includes/author.html' %}<br>
+        Всего постов автора: {{ post.author.posts.count }}<br>
+        {{ posts.user.pk }}
+        <a href="{% url 'posts:profile' post.author.username %}">все посты пользователя</a>
+      </div>
+    </div>
+  </section>
+    <article class="blog-post px-3 py-5 p-md-5">
+    {% include 'posts/includes/posts.html' %}
+    </article>
+{% endblock %}

@@ -1,0 +1,33 @@
+<div class="card blog-post-card">
+  <div class="card-footer">
+    {% include 'posts/includes/like.html' %}
+    {% if not username and page_obj %}
+      <span style="white-space:nowrap">
+        {% include 'posts/includes/author.html' %}
+      </span>
+    {% endif %}
+    <span style="white-space:nowrap;padding-left: 10px;">
+      {{ post.pub_date|date:"d E Y" }}
+    </span>
+    {% if post.group and not group %}
+      <span> Группа: <a class="text-link" href="{% url 'posts:group_list' post.group.slug %}">{{ post.group.title|truncatechars:20 }}</a></span>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <p>
+      {% if page_obj %}
+        {% filter truncatechars:250 %}
+          {{ post.text|linebreaksbr }}
+        {% endfilter %}
+      {% else %}
+        {{ post.text|linebreaksbr }}
+      {% endif %}
+    </p>
+    {% if page_obj %}
+      <p class="mb-0"><a class="text-link" href="{% url 'posts:post_detail' post.pk %}"> читать дальше &rarr;</a></p>
+    {% endif %}
+    {% if post.author.pk == user.pk and not page_obj %}
+      <p class="mb-0"><a class="text-link" href="{% url 'posts:post_edit' post.pk %}">редактировать запись</a></p>
+    {% endif %}
+  </div>
+</div>

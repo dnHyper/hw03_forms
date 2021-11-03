@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Записи сообщества {{ group.title }}{% endblock %}
+{% block content %}
+  {% include 'includes/ajax_script.html' %}
+  <section class="cta-section theme-bg-light py-5">
+    <div class="container text-center single-col-max-width">
+      <h1>{{ group.title }}</h1>
+      <div class="intro">
+        <p>{{ group.description|linebreaksbr }}</p>
+      </div>
+    </div>
+  </section>
+  <section class="blog-list px-3 py-5 p-md-5">
+    {% if page_obj %}
+      {% for post in page_obj %}
+        {% include 'posts/includes/posts.html' %}
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+      {% endfor %} 
+      {% include 'includes/paginator.html' %}
+    {% else %}
+      <p>Вы попробовали открыть страницу не существующей или удалённой группы.</p>
+    {% endif %}
+  </section>
+{% endblock %}

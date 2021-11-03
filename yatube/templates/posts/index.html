@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Последние обновления на сайте{% endblock %}
+{% block content %}
+  {% include 'includes/ajax_script.html' %}
+  <section class="cta-section theme-bg-light py-5">
+    <div class="container text-center single-col-max-width">
+      <h2 class="heading" style="padding-top:1rem !important">Последние обновления на сайте</h2>
+      <div class="intro"></div>
+    </div>
+  </section>
+  <section class="blog-list px-3 py-5 p-md-5">
+    {% for post in page_obj %}
+      <article>
+        {% include 'posts/includes/posts.html' %}
+      <article>
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+    {% endfor %}
+    {% include 'includes/paginator.html' %}
+  </section>
+{% endblock %}

@@ -1,0 +1,20 @@
+<script>
+  $(document).ready(function () {
+    $(".like").click(function() {
+      var met = $( this );
+      $.ajax({
+        headers: {'X-CSRFToken': $.cookie('csrftoken')},
+        type: 'POST',
+        data: { post: $( this ).attr('id') },
+        url: "{% url 'posts:votepost' %}",
+        success: function (result) {
+          if (result['status'] == 'add') {
+            met.find('span').text(parseInt(met.find('span').text()) + 1);
+          } else {
+            met.find('span').text(parseInt(met.find('span').text()) - 1);
+          }
+        }
+      });
+    });
+  });
+</script>
